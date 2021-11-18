@@ -1,0 +1,96 @@
+-- select * from studenti;
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- select * from studenti where koduz = g;
+-- end;//
+-- DELIMITER ;
+-- call pr_karp(1111);
+-- drop procedure pr_karp;
+
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- update studenti set pay = pay+200 where no = g;
+-- end;//
+-- DELIMITER ;
+-- call pr_karp(3);
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- select fio,gpp,pay from studenti where kodspec = g;
+-- end;//
+-- DELIMITER ;
+-- call pr_karp(3322);
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- select sum(pay) from studenti where kodspec = g;
+-- end;//
+-- DELIMITER ;
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11),k int(11))
+-- begin 
+-- select * from studenti where koduz = g and kodspec = k;
+-- end;//
+-- DELIMITER ;
+-- call pr_karp(1111,3322); 
+
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- select * from studenti where koduz = g and pay is null;
+-- end;//
+-- DELIMITER ;
+
+-- DELIMITER //
+-- create procedure pr_karp(g int(11))
+-- begin 
+-- update studenti set pay = pay*2 where koduz = g;
+-- select * from studenti where koduz = g;
+-- select * from studenti where koduz not like g;
+-- end;//
+-- DELIMITER ;
+call pr_karp(2222);
+select * from studenti;
+
+
+
+
+use svidersky;
+select * from studenti;
+
+DELIMITER #;
+CREATE FUNCTION func(x int) 
+returns int
+BEGIN 
+set @r = (select sum(pay) from studenti where koduz = x);
+return @r;
+END #;
+
+
+-- DELIMITER #;
+-- CREATE FUNCTION func(x int) 
+-- returns int
+-- BEGIN 
+-- set @r = (select count(*) from studenti where koduz like concat("%",x));
+-- return @r;
+-- END #;
+
+-- select func(3);
+
+
+-- DELIMITER #;
+-- CREATE FUNCTION func(x varchar(45)) 
+-- returns int
+-- BEGIN 
+-- set @r = (select count(*) from studenti where gpp = x);
+-- return @r;
+-- END #;
+-- select func('gg21');
+-- drop function func; 
